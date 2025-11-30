@@ -50,6 +50,11 @@
                 <fieldset>
                     <div class="body-title">Upload images <span class="tf-color-1">*</span>
                     </div>
+
+                          @if($categorie->image)
+                            <img src="{{ asset('uplods/category/'.$categorie->image) }}" width="150" class="mb-3">
+                           @endif
+
                     <div class="upload-image flex-grow">
                         <div class="item" id="imgpreview" style="display:none">
                             <img src="" class="effect8" alt="">

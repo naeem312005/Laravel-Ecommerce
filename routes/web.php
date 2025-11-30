@@ -57,7 +57,7 @@ Route::delete('/product/delete/{id}',[ProductController::class,'destroy'])->name
 Route::get('/slider',[SliderController::class,'index'])->name('slider');
 Route::get('/slider/add',[SliderController::class,'create'])->name('slider.add');
 Route::post('/slider/store',[SliderController::class,'store'])->name('slider.store');
-Route::get('/slider/edit',[SliderController::class,'edit'])->name('slider.edit');
+Route::get('/slider/edit/{id}',[SliderController::class,'edit'])->name('slider.edit');
 Route::put('/slider/update/{id}',[SliderController::class,'update'])->name('slider.update');
 Route::delete('/slider/delete/{id}',[SliderController::class,'destroy'])->name('slider.delete');
 

@@ -41,12 +41,10 @@
                     <thead>
                         <tr>
                             <th>#</th>
+                            <th>Image</th>
                             <th>Name</th>
                             <th>Price</th>
-                            <th>SalePrice</th>
-                            <th>SKU</th>
                             <th>Category</th>
-                            <th>Brand</th>
                             <th>Featured</th>
                             <th>Stock</th>
                             <th>Quantity</th>
@@ -56,20 +54,12 @@
                     <tbody>
                         <tr>
                             <td>6</td>
-                            <td class="pname">
-                                <div class="image">
-                                    <img src="1718623519.html" alt="" class="image">
-                                </div>
-                                <div class="name">
-                                    <a href="#" class="body-title-2">Product6</a>
-                                    <div class="text-tiny mt-3">product6</div>
-                                </div>
+                            <td>
+                            <img src="1718623519.html" alt="" class="image">   
                             </td>
-                            <td>$128.00</td>
+                            <td>Name</td>
                             <td>$110.00</td>
-                            <td>SKU7868</td>
                             <td>Category3</td>
-                            <td>Brand2</td>
                             <td>Yes</td>
                             <td>instock</td>
                             <td>11</td>

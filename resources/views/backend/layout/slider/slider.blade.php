@@ -44,37 +44,44 @@
                                                     <th>Tagline</th>
                                                     <th>Title</th>
                                                     <th>Subtitle</th>
-                                                    <th>Link</th>
+                                                    
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>3</td>
+                                                    @foreach ($Sliders as $Slider)
+                                                      <td>{{$loop->iteration}}</td>
                                                     <td class="pname">
                                                         <div class="image">
-                                                            <img src="1718066840.html" alt="" class="image">
+                                                        @if ($Slider->image){
+                                                                <img src="{{ asset('uplods/slider/'. $Slider->image) }}" alt="">
+                                                            } 
+                                                         @endif
                                                         </div>
                                                     </td>
-                                                    <td>New Arrivals</td>
-                                                    <td>Night Spring</td>
-                                                    <td>Dresses</td>
-                                                    <td>https://www.google.com</td>
+                                                    <td>{{ $Slider->tagline }}</td>
+                                                    <td>{{ $Slider->title }}</td>
+                                                    <td>{{ $Slider->subtitle }}</td>
+                                                    
                                                     <td>
                                                         <div class="list-icon-function">
-                                                            <a href="{{ route('slider.edit') }}">
+                                                            <a href="{{ route('slider.edit',$Slider->id) }}">
                                                                 <div class="item edit">
                                                                     <i class="icon-edit-3"></i>
                                                                 </div>
                                                             </a>
-                                                            <form action="http://localhost:8000/admin/slider/3/delete" method="POST">
-                                                                <input type="hidden" name="_token" value="8LNRTO4LPXHvbK2vgRcXqMeLgqtqNGjzWSNru7Xx" autocomplete="off"> <input type="hidden" name="_method" value="DELETE">
-                                                                <div class="item text-danger delete">
-                                                                    <i class="icon-trash-2"></i>
-                                                                </div>
+                                                            <form action="{{ route('slider.delete',$Slider->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="item text-danger delete" type="submit">
+                                                                <i class="icon-trash-2"></i>
+                                                                    </button>
                                                             </form>
                                                         </div>
-                                                    </td>
+                                                    </td>  
+                                                    @endforeach
+                                                    
                                                 </tr>
                                             </tbody>
                                         </table>

@@ -23,53 +23,50 @@ class CategoryController extends Controller
     //database data store
     public function store(Request $request)
     {
-        // $validate=$request->validate([
-        //     'name'=>'required | string|min:5|max:255',
-
-        // ]);
-        // // dd('data store success',$validate);
-
-        // Catagory::created([
-        //     'name'=> $validate['name'],
-        //     'slug'=>Str::slug($validate['name'])
-        // ]);
-        // return redirect()->route('category')->with('success', 'Data Saved Successfully!');
 
 
 
         try {
+
             //code...
             $validate = $request->validate([
                 'name' => 'required | string|max:255',
-                'status' => 'accepted'
+                'status' => 'accepted',
+                'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048'
 
             ]);
-            // dd('data store success',$validate);
+
+
+            $fileName = null;
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                // $fileName= eun.'.'.$file->getClientOriginalNamefile
+
+
+                $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $path = 'uplods/category/';
+                $file->move(public_path($path), $fileName);
+            };
+
 
             Category::create([
                 'name' => $validate['name'],
                 'slug' => Str::slug($validate['name']),
-                'status' => $validate['status']
+                'status' => $validate['status'],
+                'image' => $fileName,
             ]);
 
             return redirect()->route('category')->with('success', 'Data Saved Successfully!');
-
-
-
-
         } catch (\Throwable $th) {
             //throw $th;
             Log::error("catagory Create error:" . $th->getMessage());
             return redirect()->back()->with('error', 'Something went wrong!');
-
         }
-
     }
     public function edit($id)
     {
         $categorie = Category::find($id);
         return view('backend.layout.category.categoryEdit', compact('categorie'));
-
     }
 
 
@@ -80,16 +77,33 @@ class CategoryController extends Controller
 
         $validate = $request->validate([
             'name' => 'required | string|max:255',
-            'status' => 'accepted'
+            'status' => 'accepted',
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048'
+
         ]);
+
+
+
+         $fileName = null;
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                // $fileName= eun.'.'.$file->getClientOriginalNamefile
+
+
+                $fileName = time() . '_' . Str::random(20) . '.' . $file->getClientOriginalExtension();
+                $path = 'uplods/category/';
+                $file->move(public_path($path), $fileName);
+            };
         // dd('data store success',$validate);
         $categorie = Category::find($id);
         $categorie->update([
             'name' => $validate['name'],
             'slug' => Str::slug($validate['name']),
-            'status' => $validate['status']
+            'status' => $validate['status'],
+            'image' => $fileName,
+
         ]);
-       return redirect()->route('category')->with('success', 'Category Update Successfully!');
+        return redirect()->route('category')->with('success', 'Category Update Successfully!');
     }
 
 
@@ -98,6 +112,5 @@ class CategoryController extends Controller
     {
         Category::find($id)->delete();
         return redirect()->route('category')->with('success', 'Category Delete Successfully!');
-
     }
 }

@@ -56,11 +56,10 @@
                                 <td>{{ $categorie->slug }}</td>
                                 <td>{{ $categorie->status }}</td>
                                 <td>
-                                    {{-- @if($categorie->image)
-                                        <img src="{{ asset('uploads/categories/' . $categorie->image) }}" alt="{{ $categorie->name }}"
-                                            width="50">
-                                    @endif --}}
-                                    {{ $categorie->image }}
+                                   @if($categorie->image)
+                                         <img src="{{ asset('uplods/category/' . $categorie->image) }}"  alt="{{ $categorie->name }}" width="50">
+                                    @endif
+
                                 </td>
                                 <td>
                                     <div class="list-icon-function">
