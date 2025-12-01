@@ -52,17 +52,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($products as $product)
+                            
+                       
                         <tr>
-                            <td>6</td>
+                            <td>{{$loop->iteration}}</td>
                             <td>
-                            <img src="1718623519.html" alt="" class="image">   
+                              @if($product->image)
+                                         <img src="{{ asset('uplods/product/' . $product->image) }}"  alt="{{ $product->name }}" width="50">
+                                    @endif
+ 
                             </td>
-                            <td>Name</td>
-                            <td>$110.00</td>
-                            <td>Category3</td>
-                            <td>Yes</td>
-                            <td>instock</td>
-                            <td>11</td>
+                            <td>{{ $product->name }}</td>
+                            <td>{{ $product->price }}</td>
+                            <td>{{ $product->category->name ?? 'No Category' }}</td>
+                            <td>{{ $product->featured }}</td>
+                            <td>{{ $product->stock }}</td>
+                            <td>{{ $product->quantity }}</td>
                             <td>
                                 <div class="list-icon-function">
                                     
@@ -79,6 +85,7 @@
                                 </div>
                             </td>
                         </tr>
+                         @endforeach
                     </tbody>
                 </table>
             </div>
